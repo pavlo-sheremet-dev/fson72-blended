@@ -1,3 +1,4 @@
+import { useTheme } from '@emotion/react';
 import {
   StatisticBox,
   StatisticText,
@@ -6,10 +7,11 @@ import {
 
 import PropTypes from 'prop-types';
 
-export const StatisticItem = ({ statItem: { title, total } }) => {
+export const StatisticItem = ({ statItem: { title, total }, icon: Icon }) => {
+  const theme = useTheme();
   return (
     <StatisticBox>
-      {/* Тут має бути іконка */}
+      <Icon size={25} color={theme.colors.accent} />
       <StatisticCounter>{total}</StatisticCounter>
       <StatisticText>{title}</StatisticText>
     </StatisticBox>
