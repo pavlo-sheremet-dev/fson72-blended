@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { StatisticItem } from 'components';
 import { StatisticsList, StatisticTitle } from './Statistics.styled';
 import { FaRegThumbsUp } from 'react-icons/fa';
@@ -7,7 +8,7 @@ import { GiTreeDoor } from 'react-icons/gi';
 export const Statistics = ({ title, stats }) => {
   return (
     <>
-      <StatisticTitle>{title}</StatisticTitle>
+      {title && <StatisticTitle>{title}</StatisticTitle>}
       <StatisticsList>
         {stats.map(stat => (
           <StatisticItem key={stat.id} statItem={stat} />
@@ -15,4 +16,15 @@ export const Statistics = ({ title, stats }) => {
       </StatisticsList>
     </>
   );
+};
+
+Statistics.propTypes = {
+  title: PropTypes.string,
+  stats: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      total: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
 };
