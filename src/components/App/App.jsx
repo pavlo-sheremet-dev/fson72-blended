@@ -1,4 +1,5 @@
 import article from 'data/article.json';
+import data from 'data/data.json';
 
 import {
   BlogCard,
@@ -30,7 +31,8 @@ export const App = () => {
         <Heading marginTop="50px" marginBottom="50px" textAlign="center">
           Task 2
         </Heading>
-        <Statistics />
+        <Statistics stats={ data} title="Main Statistics" />
+        
 
         <Heading marginTop="50px" marginBottom="50px" textAlign="center">
           Task 3
