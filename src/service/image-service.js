@@ -5,15 +5,19 @@ import axios from 'axios';
 const API_KEY = '563492ad6f91700001000001639cabac73c74accb94b7bf7858095a0';
 axios.defaults.baseURL = 'https://api.pexels.com/v1';
 axios.defaults.headers.common['Authorization'] = API_KEY;
-axios.defaults.params = {
-  orientation: 'landscape',
-  per_page: 15,
-};
 
 export const getImages = async (query, page) => {
-  const response = await axios.get(`/search?query=${query}&page=${page}`);
-  console.log(response.data);
-  return response.data;
+  const params = {
+    query,
+    page,
+    orientation: 'landscape',
+    per_page: 15,
+    // api_key: API_KEY замість axios.defaults.headers в ДЗ
+  };
 
-  // console.log('test');
+  const response = await axios.get('/search', {
+    params,
+  });
+
+  return response.data;
 };
