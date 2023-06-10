@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
 import { FormBtn, InputSearch, SearchFormStyled } from './SearchForm.styled';
 
-import { nanoid } from '@reduxjs/toolkit';
 import { useTodos } from 'redux/todos/useTodos';
 
 export const SearchForm = () => {
@@ -17,7 +16,7 @@ export const SearchForm = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    addTodo({ value, id: nanoid() });
+    addTodo({ value });
     setValue('');
   };
 
