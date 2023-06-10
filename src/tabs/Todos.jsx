@@ -1,22 +1,16 @@
 import { useState } from 'react';
-import { nanoid } from 'nanoid';
 import { Grid, GridItem, SearchForm, EditForm, Text, Todo } from 'components';
 import { useLocalStorage } from 'hooks/useLocalStorage';
+import { useSelector } from 'react-redux';
+import { selectTodos } from 'redux/todos/selectors';
 
 const initialTodos = [{ value: 'initialTodo', id: 'id-1' }];
 
 export const Todos = () => {
-  const [todos, setTodos] = useLocalStorage('todos', initialTodos);
+  const todos = useSelector(selectTodos);
+
+  const [, setTodos] = useLocalStorage('todos', initialTodos);
   const [editingTodo, setEditingTodo] = useState(null);
-
-  const addTodo = newTodo => {
-    const todo = { ...newTodo, id: nanoid() };
-    setTodos(prevTodos => [...prevTodos, todo]);
-  };
-
-  const deleteTodo = id => {
-    setTodos(prevTodos => prevTodos.filter(todo => todo.id !== id));
-  };
 
   const editTodo = newTodo => {
     setTodos(prevTodos =>
@@ -40,7 +34,7 @@ export const Todos = () => {
           editTodo={editTodo}
         />
       ) : (
-        <SearchForm onSubmit={addTodo} />
+        <SearchForm />
       )}
       {todos.length !== 0 ? (
         <Grid>
@@ -50,7 +44,6 @@ export const Todos = () => {
                 id={id}
                 idx={idx}
                 description={todo}
-                deleteTodo={deleteTodo}
                 openEditForm={toggleEditForm}
               />
             </GridItem>
