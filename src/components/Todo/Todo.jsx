@@ -2,16 +2,18 @@ import { Text } from 'components';
 import { TodoWrapper, DeleteButton, EditButton } from './Todo.styled';
 import { RiDeleteBinLine, RiEdit2Line } from 'react-icons/ri';
 import { useDispatch } from 'react-redux';
-import { deleteTodo } from 'redux/todos/todosSlice';
+import { deleteTodo, toggleSelectedTodo } from 'redux/todos/todosSlice';
 
-export const Todo = ({ idx, description, id, openEditForm }) => {
+export const Todo = ({ idx, description, id }) => {
   const dispatch = useDispatch();
 
   const handleEditClick = () => {
-    openEditForm({
-      id,
-      description,
-    });
+    dispatch(
+      toggleSelectedTodo({
+        id,
+        description,
+      })
+    );
   };
 
   return (
