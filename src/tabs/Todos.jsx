@@ -1,18 +1,9 @@
 import { Grid, GridItem, SearchForm, EditForm, Text, Todo } from 'components';
-import { useSelector } from 'react-redux';
-import { selectSelectedTodo, selectTodos } from 'redux/todos/selectors';
+
+import { useTodos } from 'redux/todos/useTodos';
 
 export const Todos = () => {
-  const todos = useSelector(selectTodos);
-  const editingTodo = useSelector(selectSelectedTodo);
-
-  // const editTodo = newTodo => {
-  //   setTodos(prevTodos =>
-  //     prevTodos.map(todo => {
-  //       return todo.id !== newTodo.id ? todo : newTodo;
-  //     })
-  //   );
-  // };
+  const { todos, editingTodo } = useTodos();
 
   return (
     <>

@@ -1,6 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
+import persistReducer from 'redux-persist/es/persistReducer';
 
-export const todosSlice = createSlice({
+import storage from 'redux-persist/lib/storage';
+
+const todosSlice = createSlice({
   name: 'todos',
   initialState: { items: [], selectedTodo: null },
   reducers: {
@@ -21,5 +24,12 @@ export const todosSlice = createSlice({
   },
 });
 
+const persistedTodosSlice = persistReducer(
+  { key: 'todos', storage, whitelist: ['items'] },
+  todosSlice.reducer
+);
+
 export const { addTodo, deleteTodo, toggleSelectedTodo, editTodo } =
   todosSlice.actions;
+
+export default persistedTodosSlice;

@@ -1,19 +1,17 @@
 import { Text } from 'components';
 import { TodoWrapper, DeleteButton, EditButton } from './Todo.styled';
 import { RiDeleteBinLine, RiEdit2Line } from 'react-icons/ri';
-import { useDispatch } from 'react-redux';
-import { deleteTodo, toggleSelectedTodo } from 'redux/todos/todosSlice';
+
+import { useTodos } from 'redux/todos/useTodos';
 
 export const Todo = ({ idx, description, id }) => {
-  const dispatch = useDispatch();
+  const { toggleSelectedTodo, deleteTodo } = useTodos();
 
   const handleEditClick = () => {
-    dispatch(
-      toggleSelectedTodo({
-        id,
-        description,
-      })
-    );
+    toggleSelectedTodo({
+      id,
+      description,
+    });
   };
 
   return (
@@ -22,7 +20,7 @@ export const Todo = ({ idx, description, id }) => {
         TODO #{idx + 1}
       </Text>
       <Text>{description}</Text>
-      <DeleteButton type="button" onClick={() => dispatch(deleteTodo(id))}>
+      <DeleteButton type="button" onClick={() => deleteTodo(id)}>
         <RiDeleteBinLine size={24} />
       </DeleteButton>
       <EditButton type="button" onClick={handleEditClick}>
